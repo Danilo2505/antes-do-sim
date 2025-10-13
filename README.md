@@ -17,8 +17,8 @@ A ideia é simples: **transformar o pedido em um momento inesquecível**, com um
 
 - **HTML5** — estrutura e navegação
 - **CSS3** — estilo, animações e efeitos visuais
-- **JavaScript — interatividade e transições
-- _(Opcional)_ — áudio ambiente e efeitos de confete
+- **JavaScript** — interatividade e transições
+- **_(Opcional)_** — áudio ambiente e efeitos de confete
 
 ---
 

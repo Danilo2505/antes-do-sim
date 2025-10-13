@@ -1,0 +1,59 @@
+/* ----- Top Bar ----- */
+#header-top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* height: 3rem; */
+  background-color: var(--bg-color-2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1.5rem;
+  transform: translateY(-100%);
+  transition: transform 220ms cubic-bezier(0.2, 0.9, 0.2, 1);
+  z-index: 1000;
+}
+
+/* Sombra com ::after */
+#header-top-bar::after {
+  content: "";
+  position: absolute;
+  bottom: -0.5rem; /* desce um pouco para parecer sombra */
+  left: 0;
+  width: 100%;
+  height: 1rem; /* espessura da sombra */
+  background: linear-gradient(
+    180deg,
+    var(--bg-color-2) 25% /* sombra mais forte próxima da barra */,
+    var(--bg-color-1) 100% /* desaparece gradualmente */
+  );
+  pointer-events: none; /* evita bloquear cliques */
+  z-index: -1; /* fica atrás do conteúdo da barra */
+}
+
+#header-top-bar.show {
+  transform: translateY(0);
+}
+
+#header-top-bar h1 {
+  line-height: 1;
+  margin: 0;
+}
+
+#header-top-bar nav {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+#header-top-bar a {
+  font-size: 1.25rem;
+  text-decoration: none;
+}
+
+#header-top-bar a:hover,
+#header-top-bar a:focus {
+  color: var(--accent-color-2);
+}
