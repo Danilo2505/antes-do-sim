@@ -1,6 +1,61 @@
+/* ----- Importação de fontes ----- */
+@font-face {
+  font-family: "PlayfairDisplay";
+  src: url("/assets/fonts/PlayfairDisplay-VariableFont_wght.ttf")
+    format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PlayfairDisplay-Italic";
+  src: url("/assets/fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf")
+    format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Quicksand";
+  src: url("/assets/fonts/Quicksand-VariableFont_wght.ttf") format("truetype");
+  font-weight: 300 700;
+  font-style: normal;
+}
+
+/* ----- Switchers de fontes ----- */
+:root {
+  /* --- Fontes padrão (tema escuro) --- */
+  --font-body: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --font-heading: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --font-accent: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Tema de fontes: padrão (Quicksand) --- */
+[data-font="default"] {
+  --font-body: "Quicksand", sans-serif;
+  --font-heading: "Quicksand", sans-serif;
+  --font-accent: "Quicksand", sans-serif;
+}
+
+/* --- Tema de fontes: PlayfairDisplay --- */
+[data-font="playfair"] {
+  --font-body: "PlayfairDisplay", serif;
+  --font-heading: "PlayfairDisplay", serif;
+  --font-accent: "PlayfairDisplay-Italic", serif;
+}
+
+/* --- Tema de fontes: Segoe UI --- */
+[data-font="segoeUI"] {
+  --font-body: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --font-heading: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --font-accent: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ----- Estilização dos textos ----- */
 /* Famílias de fontes */
 body * {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: var(--font-body);
+  color: var(--bg-color-4);
 }
 
 /* Font weights utilitários */
@@ -14,24 +69,30 @@ i {
   font-style: italic;
 }
 
+em,
+i,
+blockquote {
+  font-family: var(--font-accent);
+}
+
 small {
   font-size: 0.875rem;
-  color: #666;
+  color: var(--bg-color-5);
 }
 
 /* Citações */
 blockquote {
   font-style: italic;
-  border-left: 4px solid #ccc;
+  border-left: 4px solid var(--bg-color-6);
   padding-left: 1rem;
   margin: 1rem 0;
-  color: #444;
+  color: var(--bg-color-5);
 }
 
 cite {
   font-style: normal;
   font-weight: 500;
-  color: #555;
+  color: var(--bg-color-5);
 }
 
 /* Tamanhos base para texto */
@@ -57,6 +118,8 @@ h3,
 h4,
 h5,
 h6 {
+  font-family: var(--font-heading);
+  color: var(--bg-color-4);
   line-height: 1.25;
   margin: 1.5rem 0 0.5rem;
   font-weight: 600;

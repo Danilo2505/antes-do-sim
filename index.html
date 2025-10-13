@@ -7,20 +7,28 @@
 
     <!-- ----- CSS ----- -->
     <link rel="stylesheet" href="/css/reset.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="/css/colors.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="/css/global.css" />
     <!-- --- CSS Específico --- -->
     <link rel="stylesheet" href="/css/pages/index.css" />
   </head>
 
   <!-- ----- Scripts ----- -->
+  <script src="/js/helpers.js" defer></script>
   <script src="/js/themeManager.js" defer></script>
+  <script src="/js/fontManager.js" defer></script>
+  <!-- --- Script Específico --- -->
+  <script src="/js/pages/index.js" defer></script>
 
   <body>
-    <h1>Antes do Sim</h1>
+    <header>
+      <h1>Antes do Sim</h1>
+    </header>
 
     <!-- --- Botão de Tema --- -->
-    <button id="button-tema"></button>
+    <button id="button-tema" aria-label="Mudar tema"></button>
+    <!-- --- Botão de Fonte --- -->
+    <button id="button-fonte" aria-label="Mudar fonte"></button>
   </body>
 </html>
