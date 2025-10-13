@@ -85,15 +85,20 @@ class ComponentTopBar {
     const nav = document.createElement("nav");
     const a1 = document.createElement("a");
     const a2 = document.createElement("a");
+    const a3 = document.createElement("a");
 
     a1.innerText = "Início";
-    a1.href = "/index.html";
+    a1.href = "./index.html";
 
-    a2.innerText = "Sobre";
-    a2.href = "/about.html";
+    a2.innerText = "Testes";
+    a2.href = "./tests.html";
+
+    a3.innerText = "Sobre";
+    a3.href = "./about.html";
 
     nav.appendChild(a1);
     nav.appendChild(a2);
+    nav.appendChild(a3);
     this.topbar.appendChild(nav);
   }
 

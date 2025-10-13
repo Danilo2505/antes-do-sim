@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Antes do Sim</title>
+
+    <!-- ----- CSS ----- -->
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/colors.css" />
+    <link rel="stylesheet" href="./css/fonts.css" />
+    <link rel="stylesheet" href="./css/components.css" />
+    <link rel="stylesheet" href="./css/global.css" />
+    <!-- --- CSS Específico --- -->
+    <link rel="stylesheet" href="./css/pages/tests.css" />
+  </head>
+
+  <!-- ----- Scripts ----- -->
+  <script src="./js/helpers.js"></script>
+  <script src="./js/themeManager.js" defer></script>
+  <script src="./js/fontManager.js" defer></script>
+  <script src="./js/components.js" defer></script>
+  <!-- --- Script Específico --- -->
+  <script src="./js/pages/tests.js" defer></script>
+
+  <body>
+    <header id="header-top-bar">
+      <h1>Testes</h1>
+    </header>
+
+    <!-- --- Audio Player --- -->
+    <div id="div-audio-player">
+      <img src="./assets/media/images/vinyl-4808792_1920.jpg" alt="" />
+      <div>
+        <button id="button-back">
+          <img
+            src="./assets/icons/arrow-counterclockwise.svg"
+            alt=""
+            onload="buscarSvg(this)"
+          />
+        </button>
+        <button id="button-play-pause">
+          <img
+            src="./assets/icons/play-fill.svg"
+            alt=""
+            onload="buscarSvg(this)"
+          />
+        </button>
+        <button id="button-forward">
+          <img
+            src="./assets/icons/arrow-clockwise.svg"
+            alt=""
+            onload="buscarSvg(this)"
+          />
+        </button>
+      </div>
+    </div>
+
+    <!-- --- Botão de Tema --- -->
+    <button id="button-tema" aria-label="Mudar tema"></button>
+    <!-- --- Botão de Fonte --- -->
+    <button id="button-fonte" aria-label="Mudar fonte"></button>
+  </body>
+</html>
