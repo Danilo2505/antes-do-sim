@@ -15,7 +15,9 @@ body {
   flex-direction: column;
 }
 
-button:hover svg {
+button:hover svg,
+button:hover span {
+  font-weight: 500;
   transform: scale(1.1);
   transition: 0.3s;
 }

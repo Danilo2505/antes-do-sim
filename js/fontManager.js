@@ -8,9 +8,9 @@ function defineCurrentFont(font, btnFontToggle) {
   // Ícones diferentes para cada fonte (opcional, mas dá um charme visual)
   const defaultContent = `<span style='font-family: "Quicksand", sans-serif;'>A</span>`;
 
-  const playfairContent = `<span style='font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;'>A</span>`;
+  const playfairContent = `<span style='font-family: "PlayfairDisplay", serif;'>A</span>`;
 
-  const segoeUIContent = `<span style='font-family: "PlayfairDisplay", serif;'>A</span>`;
+  const segoeUIContent = `<span style='font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;'>A</span>`;
 
   document.documentElement.setAttribute("data-font", font);
 
