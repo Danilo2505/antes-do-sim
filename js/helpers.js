@@ -11,3 +11,8 @@ const buscarSvg = (image) => {
       return true;
     });
 };
+
+function xmlStringToHtmlElement(xmlString) {
+  var doc = new DOMParser().parseFromString(xmlString, "text/xml");
+  return doc.firstChild;
+}

@@ -1,35 +1,40 @@
 :root {
   /* --- Tema Escuro (padrão) --- */
-  --bg-color-1: #0e0e0e; /* Fundo principal */
-  --bg-color-2: #1a1a1a; /* Fundo de cartões / containers */
-  --bg-color-3: #2a2a2a; /* Linhas / contrastes sutis */
-  --bg-color-4: #f5f5f5; /* Texto principal */
-  --bg-color-5: #cccccc; /* Texto secundário */
-  --bg-color-6: #3a3a3a; /* Bordas / divisores */
+  --bg-color-1: #0b0b0d; /* Fundo principal — preto com leve azul, elegante */
+  --bg-color-2: #17171a; /* Fundo de cartões / containers */
+  --bg-color-3: #2b2b2f; /* Linhas / contrastes sutis */
+  --bg-color-4: #f8f8f8; /* Texto principal */
+  --bg-color-5: #c6c6c6; /* Texto secundário */
+  --bg-color-6: #3c3c3f; /* Bordas / divisores */
 
-  --accent-color-1: #ffffff; /* Elementos neutros (ícones, etc.) */
-  --accent-color-2: #e63946; /* Vermelho de alerta */
-  --accent-color-3: #7b61ff; /* Roxo para destaques */
-  --accent-color-4: #06d6a0; /* Ciano-esverdeado de ação */
+  /* --- Toques de cor emocional --- */
+  --accent-color-1: #ffffff; /* Elementos neutros (ícones, linhas) */
+  --accent-color-2: #ff4f70; /* Rosa-avermelhado — paixão e ternura */
+  --accent-color-3: #9b7bff; /* Lilás — romantismo e imaginação */
+  --accent-color-4: #2dd4bf; /* Verde-água — esperança e serenidade */
 
-  --inactive-button-bg-color: #2a2a2a;
-  --inactive-button-color: #aaaaaa;
+  /* --- Estados e botões --- */
+  --inactive-button-bg-color: #222;
+  --inactive-button-color: #888;
+  --highlight-glow: rgba(255, 79, 112, 0.3); /* leve brilho para efeitos */
 }
 
 /* --- Tema Claro --- */
 [data-theme="light"] {
-  --bg-color-1: #ffffff; /* Fundo principal */
-  --bg-color-2: #e8e8e8; /* Fundo de cartões */
-  --bg-color-3: #d5d5d5; /* Linhas / contraste suave */
-  --bg-color-4: #1a1a1a; /* Texto principal */
-  --bg-color-5: #333333; /* Texto secundário */
-  --bg-color-6: #d0d0d0; /* Bordas / divisores */
+  --bg-color-1: #fff8f9; /* Fundo principal com tom quente */
+  --bg-color-2: #f2eef6; /* Fundo de cartões com leve lilás */
+  --bg-color-3: #e5e2ea; /* Linhas / contraste suave */
+  --bg-color-4: #1c1c1e; /* Texto principal */
+  --bg-color-5: #444; /* Texto secundário */
+  --bg-color-6: #dad6e0; /* Bordas / divisores */
 
-  --accent-color-1: #000000; /* Elementos neutros (ícones, etc.) */
-  --accent-color-2: #d62828; /* Vermelho consistente */
-  --accent-color-3: #5a3efc; /* Roxo mais sóbrio */
-  --accent-color-4: #00bfa6; /* Ciano-esverdeado igual ao tema escuro */
+  /* --- Toques de cor emocional --- */
+  --accent-color-1: #000000;
+  --accent-color-2: #e63956; /* Vermelho-romântico */
+  --accent-color-3: #7c5aff; /* Roxo mais vibrante */
+  --accent-color-4: #00bfa6; /* Ciano-esverdeado consistente */
 
-  --inactive-button-bg-color: #e5e5e5;
-  --inactive-button-color: #666666;
+  --inactive-button-bg-color: #efefef;
+  --inactive-button-color: #777;
+  --highlight-glow: rgba(230, 57, 86, 0.2);
 }
