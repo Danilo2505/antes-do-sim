@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Antes do Sim</title>
-    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="./favicon.png" type="image/png" />
 
     <!-- ----- CSS ----- -->
     <link rel="stylesheet" href="./css/reset.css" />
@@ -18,52 +18,79 @@
 
   <!-- ----- Scripts ----- -->
   <script src="./js/helpers.js"></script>
-  <script src="./js/themeManager.js" defer></script>
-  <script src="./js/fontManager.js" defer></script>
+  <script src="./js/themeManager.js"></script>
+  <script src="./js/fontManager.js"></script>
   <script src="./js/components.js" defer></script>
   <!-- --- Script Específico --- -->
   <script src="./js/pages/index.js" defer></script>
 
   <body>
+    <!-- --- Componente TopBar --- -->
     <header id="header-top-bar">
       <h1>Antes do Sim</h1>
     </header>
 
     <div id="div-top-spacer"></div>
 
-    <!-- --- Seção Introdução --- -->
-    <section id="section-intro">
-      <h2>Ei, lembra daquele dia?</h2>
-    </section>
+    <main id="main-cards">
+      <!-- --- Seção Introdução --- -->
+      <section id="section-intro">
+        <h2>Ei, lembra daquele dia?</h2>
+      </section>
+      <!-- --- Seção Primeiro Encontro --- -->
+      <section id="section-first-meeting">
+        <h2>Quando tudo começou</h2>
+      </section>
+      <!-- --- Seção Nossos Momentos --- -->
+      <section id="section-moments">
+        <h2>As memórias que ficaram</h2>
+      </section>
+      <!-- --- Seção Significado --- -->
+      <section id="section-meaning">
+        <h2>Entre tudo o que vivi</h2>
+      </section>
+      <!-- --- Seção Pedido --- -->
+      <section id="section-proposal">
+        <h2>Quer namorar comigo?</h2>
+      </section>
+      <!-- --- Seção Pós-Créditos --- -->
+      <section id="section-post-credits">
+        <h2>Nosso novo capítulo</h2>
+      </section>
 
-    <!-- --- Seção Primeiro Encontro --- -->
-    <section id="section-first-meeting">
-      <h2>Quando tudo começou</h2>
-    </section>
+      <div id="div-cards-navigation-buttons">
+        <button class="button-previous" onclick="previousCard()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-caret-left-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"
+            />
+          </svg>
+        </button>
+        <button class="button-next" onclick="nextCard()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-caret-right-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"
+            />
+          </svg>
+        </button>
+      </div>
+    </main>
 
-    <!-- --- Seção Nossos Momentos --- -->
-    <section id="section-moments">
-      <h2>As memórias que ficaram</h2>
-    </section>
-
-    <!-- --- Seção Significado --- -->
-    <section id="section-meaning">
-      <h2>Entre tudo o que vivi</h2>
-    </section>
-
-    <!-- --- Seção Pedido --- -->
-    <section id="section-proposal">
-      <h2>Quer namorar comigo?</h2>
-    </section>
-
-    <!-- --- Seção Pós-Créditos --- -->
-    <section id="section-post-credits">
-      <h2>Nosso novo capítulo</h2>
-    </section>
-
-    <!-- --- Botão de Tema --- -->
-    <button id="button-tema" aria-label="Mudar tema"></button>
-    <!-- --- Botão de Fonte --- -->
-    <button id="button-fonte" aria-label="Mudar fonte"></button>
+    <!-- --- Componente SettingsPanel --- -->
+    <div id="div-settings-panel"></div>
   </body>
 </html>

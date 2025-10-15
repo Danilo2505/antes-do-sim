@@ -20,10 +20,11 @@ class ComponentTopBar {
 
   // Carrega o conteúdo da Top Bar
   loadContent() {
-    const nav = document.createElement("nav");
+    const div = document.createElement("div");
     const a1 = document.createElement("a");
     const a2 = document.createElement("a");
     const a3 = document.createElement("a");
+    const buttonSettings = document.createElement("button");
 
     a1.innerText = "Início";
     a1.href = "./index.html";
@@ -34,10 +35,16 @@ class ComponentTopBar {
     a3.innerText = "Sobre";
     a3.href = "./about.html";
 
-    nav.appendChild(a1);
-    nav.appendChild(a2);
-    nav.appendChild(a3);
-    this.topBar.appendChild(nav);
+    buttonSettings.id = "button-settings";
+    buttonSettings.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+  <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+</svg>`;
+
+    div.appendChild(a1);
+    div.appendChild(a2);
+    div.appendChild(a3);
+    div.appendChild(buttonSettings);
+    this.topBar.appendChild(div);
   }
 
   // Define os Event Listeners
@@ -138,7 +145,7 @@ class ComponentTopBar {
 }
 
 // ----- Audio Player -----
-class AudioPlayer {
+class ComponentAudioPlayer {
   constructor() {
     // --- Referências principais ---
     this.audioPlayer = document.querySelector("#div-audio-player");
@@ -299,7 +306,87 @@ class AudioPlayer {
     }
   }
 }
+// ----- Settings Panel (Modal) -----
+class ComponentSettingsPanel {
+  constructor() {
+    this.panel = document.querySelector("#div-settings-panel");
+    this.buttonOpen = document.querySelector("#button-settings");
 
-// Instancia
-const topBar = new ComponentTopBar();
-const audioPlayer = new AudioPlayer();
+    this.loadContent();
+    this.initReferences();
+    this.initEvents();
+    this.initState();
+  }
+
+  // Adiciona o conteúdo do modal
+  loadContent() {
+    if (!this.panel) {
+      console.error("❌ #div-settings-panel não encontrado.");
+      return;
+    }
+
+    this.panel.innerHTML = `
+      <div class="modal-content">
+        <div class="modal-title-bar">
+          <h2>Configurações</h2>
+          <span class="close" tabindex="0">&times;</span>
+        </div>
+        <div>
+          <span>Mudar tema</span>
+          <button id="button-tema" aria-label="Mudar tema">Tema</button>
+        </div>
+        <div>
+          <span>Mudar fonte</span>
+          <button id="button-fonte" aria-label="Mudar fonte">Fonte</button>
+        </div>
+      </div>
+    `;
+  }
+
+  initReferences() {
+    this.buttonClose = this.panel.querySelector(".close");
+    this.buttonTema = this.panel.querySelector("#button-tema");
+    this.buttonFonte = this.panel.querySelector("#button-fonte");
+  }
+
+  initEvents() {
+    // Abrir painel
+    this.buttonOpen.addEventListener("click", () => this.showPanel());
+
+    // Fechar painel com X
+    this.buttonClose.addEventListener("keydown", () => this.hidePanel());
+    this.buttonClose.addEventListener("click", () => this.hidePanel());
+
+    // Fechar clicando fora do conteúdo
+    window.addEventListener("click", (e) => {
+      if (e.target === this.panel) this.hidePanel();
+    });
+
+    // ESC fecha
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") this.hidePanel();
+    });
+
+    // Botões de tema e fonte
+    this.buttonTema.addEventListener("click", () =>
+      ThemeManager.toggleTheme(this.buttonTema)
+    );
+
+    this.buttonFonte.addEventListener("click", () =>
+      FontManager.toggleFont(this.buttonFonte)
+    );
+  }
+
+  initState() {
+    ThemeManager.init(this.buttonTema);
+    FontManager.init(this.buttonFonte);
+  }
+
+  showPanel() {
+    this.panel.classList.add("show");
+  }
+
+  hidePanel() {
+    this.panel.classList.remove("show");
+  }
+}

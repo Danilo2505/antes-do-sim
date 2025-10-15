@@ -1,40 +1,45 @@
 :root {
   /* --- Tema Escuro (padrão) --- */
-  --bg-color-1: #0b0b0d; /* Fundo principal — preto com leve azul, elegante */
-  --bg-color-2: #17171a; /* Fundo de cartões / containers */
-  --bg-color-3: #2b2b2f; /* Linhas / contrastes sutis */
-  --bg-color-4: #f8f8f8; /* Texto principal */
-  --bg-color-5: #c6c6c6; /* Texto secundário */
-  --bg-color-6: #3c3c3f; /* Bordas / divisores */
+  --bg-color-1: #0b0406; /* Fundo principal — preto com leve tom vinho */
+  --bg-color-2: #1b0814; /* Fundo de cartões — bordô profundo */
+  --bg-color-3: #2a0f1f; /* Linhas / contraste sutil */
+  --bg-color-4: #f9f5f6; /* Texto principal — branco rosado, calor humano */
+  --bg-color-5: #c8bfc4; /* Texto secundário — cinza rosado */
+  --bg-color-6: #3a1a2b; /* Bordas / divisores */
 
-  /* --- Toques de cor emocional --- */
-  --accent-color-1: #ffffff; /* Elementos neutros (ícones, linhas) */
-  --accent-color-2: #ff4f70; /* Rosa-avermelhado — paixão e ternura */
-  --accent-color-3: #9b7bff; /* Lilás — romantismo e imaginação */
-  --accent-color-4: #2dd4bf; /* Verde-água — esperança e serenidade */
+  /* --- Cores de destaque --- */
+  --accent-color-1: #ffffff; /* Neutro (ícones, texto sobre cor forte) */
+  --accent-color-2: #eb1261; /* Rosa-romântico (principal) */
+  --accent-color-5: #ea0d01; /* Vermelho de paixão e intensidade */
+  --accent-color-4: #26b799; /* Verde-água do “sim” e da esperança */
+  --accent-color-5: #e8a623; /* Dourado de nostalgia e ternura */
+  --inactive-button-bg-color: #f4e9ec;
+  --inactive-button-color: #77686e;
 
-  /* --- Estados e botões --- */
-  --inactive-button-bg-color: #222;
-  --inactive-button-color: #888;
-  --highlight-glow: rgba(255, 79, 112, 0.3); /* leve brilho para efeitos */
+  /* --- Botões e efeitos --- */
+  --inactive-button-bg-color: #a8999d;
+  --inactive-button-color: #473f42;
+  --highlight-glow: rgba(235, 18, 97, 0.35); /* brilho rosa */
 }
 
 /* --- Tema Claro --- */
 [data-theme="light"] {
-  --bg-color-1: #fff8f9; /* Fundo principal com tom quente */
-  --bg-color-2: #f2eef6; /* Fundo de cartões com leve lilás */
-  --bg-color-3: #e5e2ea; /* Linhas / contraste suave */
-  --bg-color-4: #1c1c1e; /* Texto principal */
-  --bg-color-5: #444; /* Texto secundário */
-  --bg-color-6: #dad6e0; /* Bordas / divisores */
+  --bg-color-1: #fff8f9; /* Fundo principal suave */
+  --bg-color-2: #fdecef; /* Fundo de cartões levemente rosado */
+  --bg-color-3: #f3dfe3; /* Linhas / contraste suave */
+  --bg-color-4: #1b0b10; /* Texto principal */
+  --bg-color-5: #4c3b41; /* Texto secundário */
+  --bg-color-6: #e0ccd1; /* Bordas / divisores */
 
-  /* --- Toques de cor emocional --- */
+  /* --- Cores de destaque --- */
   --accent-color-1: #000000;
-  --accent-color-2: #e63956; /* Vermelho-romântico */
-  --accent-color-3: #7c5aff; /* Roxo mais vibrante */
-  --accent-color-4: #00bfa6; /* Ciano-esverdeado consistente */
+  --accent-color-2: #d81255; /* Rosa-romântico mais visível no claro */
+  --accent-color-5: #e04b3d; /* Vermelho mais quente */
+  --accent-color-4: #1fa58e; /* Verde-água equilibrado */
+  --accent-color-5: #e8a623; /* Dourado suave */
 
-  --inactive-button-bg-color: #efefef;
-  --inactive-button-color: #777;
-  --highlight-glow: rgba(230, 57, 86, 0.2);
+  /* --- Botões e efeitos --- */
+  --inactive-button-bg-color: #44343c;
+  --inactive-button-color: #9b8a90;
+  --highlight-glow: rgba(216, 18, 85, 0.25);
 }

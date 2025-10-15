@@ -96,13 +96,14 @@ cite {
 }
 
 /* Tamanhos base para texto */
+a,
 p,
 span,
 li,
 td,
 th {
   font-size: 1.2rem;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 label {
