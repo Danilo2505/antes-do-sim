@@ -1,12 +1,54 @@
+// ----- Top Bar Expand Manager -----
+const TopBarExpandManager = {
+  // Ativa ou desativa a exibição das opções da Top Bar
+  defineState(show, button) {
+    const topBar = document.querySelector("#header-top-bar");
+
+    if (show) {
+      topBar.setAttribute("show-top-bar-options", "true");
+    } else {
+      topBar.removeAttribute("show-top-bar-options");
+    }
+
+    // Atualiza o ícone do botão
+    if (button) {
+      const downSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+      </svg>`;
+      const upSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M1.646 11.354a.5.5 0 0 0 .708 0L8 5.707l5.646 5.647a.5.5 0 0 0 .708-.708l-6-6a.5.5 0 0 0-.708 0l-6 6a.5.5 0 0 0 0 .708"/>
+      </svg>`;
+
+      button.innerHTML = show ? upSvg : downSvg;
+    }
+
+    // Salva no localStorage
+    localStorage.setItem("showTopBarOptions", show ? "true" : "false");
+  },
+
+  // Alterna o estado atual
+  toggle(button) {
+    const current = localStorage.getItem("showTopBarOptions") === "true";
+    this.defineState(!current, button);
+  },
+
+  // Inicializa de acordo com o valor salvo
+  init(button) {
+    const saved = localStorage.getItem("showTopBarOptions") === "true";
+    this.defineState(saved, button);
+  },
+};
+
 // ----- Top Bar -----
 class ComponentTopBar {
   constructor() {
     // --- Referências principais ---
     this.divTopSpacer = document.querySelector("#div-top-spacer");
     this.topBar = document.querySelector("#header-top-bar");
+    this.buttonExpandCollapse = null;
 
     // --- Configurações ---
-    this.threshold = 30; // distância em pixels da borda superior para ativar
+    this.threshold = 15;
     this.visible = false;
     this.lastY = Infinity;
     this.hideTimeout = null;
@@ -14,8 +56,18 @@ class ComponentTopBar {
     // --- Carrega o componente no HTML ---
     this.loadContent();
 
-    // --- Event Listeners ---
+    // --- Inicializa referências e eventos ---
+    this.initReferences();
     this.initEvents();
+
+    // --- Reset de expansão no carregamento ---
+    TopBarExpandManager.defineState(false, this.buttonExpandCollapse);
+  }
+
+  initReferences() {
+    this.buttonExpandCollapse = this.topBar.querySelector(
+      "#button-expand-collapse"
+    );
   }
 
   // Carrega o conteúdo da Top Bar
@@ -25,6 +77,7 @@ class ComponentTopBar {
     const a2 = document.createElement("a");
     const a3 = document.createElement("a");
     const buttonSettings = document.createElement("button");
+    const buttonExpandCollapse = document.createElement("button");
 
     a1.innerText = "Início";
     a1.href = "./index.html";
@@ -40,15 +93,30 @@ class ComponentTopBar {
   <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
 </svg>`;
 
+    buttonExpandCollapse.id = "button-expand-collapse";
+    buttonExpandCollapse.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+</svg>`;
+
     div.appendChild(a1);
     div.appendChild(a2);
     div.appendChild(a3);
     div.appendChild(buttonSettings);
     this.topBar.appendChild(div);
+
+    this.topBar.appendChild(buttonExpandCollapse);
   }
 
   // Define os Event Listeners
   initEvents() {
+    const scrollY = window.scrollY;
+
+    // --- Mostra a Top Bar se a página estiver no topo ---
+    if (scrollY <= 50) {
+      // 50px do topo, ajuste se necessário
+      this.showBar();
+    }
+
     // Detecta movimento do mouse
     window.addEventListener("mousemove", (e) => {
       this.lastY = e.clientY;
@@ -73,12 +141,20 @@ class ComponentTopBar {
       "scroll",
       () => {
         const curr = window.scrollY;
+
+        // --- Mostra a Top Bar se estiver rolando para cima ---
         if (curr < lastScrollY) {
-          // Rolando para cima
           this.showBar();
           if (this.hideTimeout) clearTimeout(this.hideTimeout);
           this.hideTimeout = setTimeout(() => this.hideBar(), 1500);
         }
+
+        // --- Mostra a Top Bar se estiver próximo ao topo (scroll baixo) ---
+        if (curr <= 50) {
+          // 50px do topo, pode ajustar
+          this.showBar();
+        }
+
         lastScrollY = curr;
       },
       { passive: true }
@@ -108,6 +184,17 @@ class ComponentTopBar {
       },
       { passive: true }
     );
+
+    // --- Dentro do initEvents() do ComponentTopBar ---
+    const buttonExpandCollapse = this.topBar.querySelector(
+      "#button-expand-collapse"
+    );
+    buttonExpandCollapse.addEventListener("click", () => {
+      TopBarExpandManager.toggle(buttonExpandCollapse);
+    });
+
+    // Inicializa o estado salvo
+    TopBarExpandManager.init(buttonExpandCollapse);
   }
 
   // Mostra a Top Bar
@@ -140,6 +227,20 @@ class ComponentTopBar {
       this.visible = false;
       this.topBar.classList.remove("show");
       this.divTopSpacer.style.removeProperty("margin-top");
+
+      // --- Atualiza o estado de expansão ao esconder ---
+      if (this.topBar.hasAttribute("show-top-bar-options")) {
+        this.topBar.removeAttribute("show-top-bar-options");
+        localStorage.setItem("showTopBarOptions", "false");
+      }
+
+      // Se estiver usando o botão, também pode atualizar o ícone
+      if (this.buttonExpandCollapse) {
+        const downSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+      </svg>`;
+        this.buttonExpandCollapse.innerHTML = downSvg;
+      }
     }
   }
 }
