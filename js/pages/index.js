@@ -1,3 +1,4 @@
+/* ----- Cards/Seções ----- */
 const mainCards = document.querySelector("#main-cards");
 const firstCard = mainCards.querySelector("section");
 

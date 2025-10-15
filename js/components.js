@@ -263,7 +263,7 @@ class ComponentAudioPlayer {
     this.songs = [
       "./assets/media/audio/Matt Pridgyn - Second Wind [NCS Release].mp3",
       "./assets/media/audio/More Plastic - Rewind [NCS Release].mp3",
-      "./assets/media/audio/the-flow-of-time-by-alex-productions",
+      "./assets/media/audio/the-flow-of-time-by-alex-productions.mp3",
     ];
 
     // --- Event Listeners ---
