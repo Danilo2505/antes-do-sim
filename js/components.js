@@ -258,12 +258,13 @@ class ComponentAudioPlayer {
     this.buttonPlayPause = this.audioPlayer.querySelector("#button-play-pause");
     this.buttonNext = this.audioPlayer.querySelector("#button-next");
     this.audio = document.querySelector("#audio-from-audio-player");
+    this.coverImg = document.querySelector("#div-audio-player .img-song-cover");
 
     this.audioIndex = 0;
     this.songs = [
-      "./assets/media/audio/Matt Pridgyn - Second Wind [NCS Release].mp3",
-      "./assets/media/audio/More Plastic - Rewind [NCS Release].mp3",
-      "./assets/media/audio/the-flow-of-time-by-alex-productions.mp3",
+      "./assets/media/audio/Second Wind - Matt Pridgyn.mp3",
+      "./assets/media/audio/Rewind - More Plastic.mp3",
+      "./assets/media/audio/The Flow of Time - Alex Cristoforetti.mp3",
     ];
 
     // --- Event Listeners ---
@@ -272,44 +273,115 @@ class ComponentAudioPlayer {
 
   // Cria o conteúdo do Player (imagem, botões e áudio)
   loadContent() {
+    // --- Capa da Música ---
     // Cria imagem
     const img = document.createElement("img");
-    img.src = "./assets/media/images/vinyl-4808792_1920.jpg";
+    img.classList.add("img-song-cover");
+    img.src = "./assets/media/images/song-not-found.jpg";
     img.alt = "";
 
+    // --- Informações da Música ---
+    // Cria container dos botões
+    const infoDiv = document.createElement("div");
+    infoDiv.classList.add("div-song-info");
+
+    // Nome e Artista da Música
+    const title = document.createElement("span");
+    const artist = document.createElement("span");
+
+    title.classList.add("span-song-title");
+    artist.classList.add("span-song-artist");
+
+    // --- Botões de Controle ---
     // Cria container dos botões
     const controlsDiv = document.createElement("div");
+    controlsDiv.classList.add("div-song-controls");
 
-    // --- Botão Voltar ---
+    // - Botão Voltar -
     const buttonBack = document.createElement("button");
     buttonBack.id = "button-back";
     buttonBack.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-start-fill" viewBox="0 0 16 16">
   <path d="M4 4a.5.5 0 0 1 1 0v3.248l6.267-3.636c.54-.313 1.232.066 1.232.696v7.384c0 .63-.692 1.01-1.232.697L5 8.753V12a.5.5 0 0 1-1 0z"/>
 </svg>`;
 
-    // --- Botão Play/Pause ---
+    // - Botão Play/Pause -
     const buttonPlayPause = document.createElement("button");
     buttonPlayPause.id = "button-play-pause";
     buttonPlayPause.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
     <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393"/>
     </svg>`;
 
-    // --- Botão Próximo ---
+    // - Botão Próximo -
     const buttonNext = document.createElement("button");
     buttonNext.id = "button-next";
     buttonNext.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-end-fill" viewBox="0 0 16 16">
   <path d="M12.5 4a.5.5 0 0 0-1 0v3.248L5.233 3.612C4.693 3.3 4 3.678 4 4.308v7.384c0 .63.692 1.01 1.233.697L11.5 8.753V12a.5.5 0 0 0 1 0z"/>
 </svg>`;
 
-    // Adiciona os botões
-    controlsDiv.append(buttonBack, buttonPlayPause, buttonNext);
-
+    // --- Áudio ---
     // Cria o áudio
     const audio = document.createElement("audio");
     audio.id = "audio-from-audio-player";
 
+    // --- Adicionar Elementos ---
+    // Adiciona as informações
+    infoDiv.append(title, artist);
+
+    // Adiciona os botões
+    controlsDiv.append(buttonBack, buttonPlayPause, buttonNext);
+
     // Adiciona tudo ao container principal
-    this.audioPlayer.append(img, controlsDiv, audio);
+    this.audioPlayer.append(img, infoDiv, controlsDiv, audio);
+  }
+
+  async loadSongMetadata() {
+    try {
+      // Tenta ler o áudio
+      jsmediatags.read(this.audio.src, {
+        onSuccess: function (tag) {
+          // --- Capa ---
+          const coverImg = document.querySelector(
+            "#div-audio-player .img-song-cover"
+          );
+          const image = tag.tags.picture;
+
+          if (image) {
+            const bytes = new Uint8Array(image.data);
+            const blob = new Blob([bytes], { type: image.format });
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+              coverImg.src = e.target.result; // já vira dataURL automaticamente
+            };
+
+            reader.readAsDataURL(blob);
+          } else {
+            coverImg.src = "./assets/media/images/song-not-found.jpg";
+            console.log("Nenhuma imagem de capa encontrada nas tags MP3.");
+          }
+
+          // --- Título ---
+          const title = tag.tags.title || "Título desconhecido";
+          const spanTitle = document.querySelector(
+            "#div-audio-player .span-song-title"
+          );
+          spanTitle.textContent = title;
+
+          // --- Artista ---
+          const artist = tag.tags.artist || "Artista desconhecido";
+          const spanArtist = document.querySelector(
+            "#div-audio-player .span-song-artist"
+          );
+          spanArtist.textContent = artist;
+        },
+
+        onError: (error) => {
+          console.error("Erro ao ler as tags:", error);
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   // Define os Event Listeners
@@ -332,6 +404,11 @@ class ComponentAudioPlayer {
     // Fim da Música, vai para a próxima música
     this.audio.addEventListener("ended", () => {
       this.nextSong();
+    });
+
+    // Quando o navegador começa a carregar a nova fonte de áudio
+    this.audio.addEventListener("loadstart", async () => {
+      await this.loadSongMetadata();
     });
 
     // Define o Botão como Play e coloca uma música no Áudio
