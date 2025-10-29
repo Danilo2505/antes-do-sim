@@ -277,7 +277,7 @@ class ComponentAudioPlayer {
     // Cria imagem
     const img = document.createElement("img");
     img.classList.add("img-song-cover");
-    img.src = "./assets/media/images/song-not-found.jpg";
+    img.src = ".assets/media/images/song-not-found.jpg";
     img.alt = "";
 
     // --- Informações da Música ---
@@ -356,7 +356,7 @@ class ComponentAudioPlayer {
 
             reader.readAsDataURL(blob);
           } else {
-            coverImg.src = "./assets/media/images/song-not-found.jpg";
+            coverImg.src = ".assets/media/images/song-not-found.jpg";
             console.log("Nenhuma imagem de capa encontrada nas tags MP3.");
           }
 
@@ -376,7 +376,7 @@ class ComponentAudioPlayer {
         },
 
         onError: (error) => {
-          console.error("Erro ao ler as tags:", error);
+          console.error("Erro ao ler as tags:", JSON.stringify(error, null, 2));
         },
       });
     } catch (error) {
